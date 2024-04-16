@@ -1,0 +1,22 @@
+import numpy as np
+a = np.array([1,2,3],dtype=complex)
+print("a=",a)
+b = np.empty([3,3],dtype=int)
+print("b=",b)
+c = np.zeros([3,3],dtype=int)
+print("c=",c)
+d = np.ones([3,3],dtype=int)
+print("d=",d)
+e = [1,2,3]
+f = np.asarray(e)
+print("f=",f)
+g = (1,2,3)
+h = np.asarray(g)
+print("h=",h)
+j = b'what is python'
+k = np.frombuffer(j,dtype='S1')
+print("k=",k)
+l = np.arange(1,20,3)
+print("l=",l)
+m = np.linspace(1,20,5)
+print("m=",m)
