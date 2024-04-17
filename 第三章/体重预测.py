@@ -34,16 +34,18 @@ def calculate_loss(x, y):
 def plot_scatter_and_line(x, y, w, b):
     plt.scatter(x, y)
     plt.plot(x, w * np.array(x) + b, c='r')
-    plt.xlabel("货运量")
-    plt.ylabel("生产总值")
-    plt.title("货运量和生产总值的关系")
+    plt.xlabel("身高")
+    plt.ylabel("体重")
+    plt.title("身高和体重的关系")
     plt.show()
 
 if __name__ == "__main__":
     import_modules()
-    filename = '货运量与工业总产值数据集.csv'
+    filename = '人工智能技术专业学生身高体重数据集.csv'
     x, y = read_data(filename)
     w, b, loss = calculate_loss(x, y)
     print("均方差损失函数值为：", loss)
     plot_scatter_and_line(x, y, w, b)
+    your = input("请输入你的身高：")
+    print(w*float(your)+b)
 
