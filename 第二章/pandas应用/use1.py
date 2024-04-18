@@ -5,7 +5,7 @@ data = {"name":["Tom","Mike","Mary","Bob","Alice","Betty","Helen","David","John"
 user = pd.DataFrame(data)
 user["sex"] = "male"
 print(user)
-user.to_csv('user.cvs')
+user.to_csv('user.csv')
 print(user.describe())
 print(user.name)
 print(user.loc[2])
