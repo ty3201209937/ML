@@ -23,47 +23,13 @@ def create_data():
     ]
 
     labels = ['色泽', '根蒂', '敲声', '纹理', '脐部', '触感', '好瓜']
-
-    # datasets = [
-    #     ['青绿', '蜷缩', '浊响', '清晰', '凹陷', '硬滑', '是'],
-    #     ['浅白', '蜷缩', '浊响', '清晰', '凹陷', '硬滑', '是'],
-    #     ['乌黑', '稍蜷', '浊响', '清晰', '稍凹', '软粘', '否'],
-    #     ['青绿', '稍蜷', '浊响', '清晰', '稍凹', '软粘', '是'],
-    #     ['乌黑', '稍蜷', '浊响', '清晰', '稍凹', '硬滑', '是'],
-    #     ['乌黑', '蜷缩', '沉闷', '清晰', '凹陷', '硬滑', '是'],
-    #     ['乌黑', '蜷缩', '浊响', '清晰', '凹陷', '硬滑', '是'],
-    #     ['青绿', '硬挺', '清脆', '清晰', '平坦', '软粘', '否'],
-    #     ['青绿', '蜷缩', '沉闷', '清晰', '凹陷', '硬滑', '是']
-    # ]
-    # labels = ['色泽', '根蒂', '敲声', '纹理', '脐部', '触感', '好瓜']
-
-    # datasets = [
-    #     ['青绿', '稍蜷', '浊响', '稍糊', '凹陷', '硬滑', '否'],
-    #     ['浅白', '稍蜷', '沉闷', '稍糊', '凹陷', '硬滑', '否'],
-    #     ['乌黑', '稍蜷', '沉闷', '稍糊', '稍凹', '硬滑', '否'],
-    #     ['乌黑', '稍蜷', '浊响', '稍糊', '稍凹', '软粘', '是'],
-    #     ['青绿', '蜷缩', '沉闷', '稍糊', '稍凹', '硬滑', '否']
-    # ]
-    # labels = ['色泽', '根蒂', '敲声', '纹理', '脐部', '触感', '好瓜']
-
-    # datasets = [
-    #     ['乌黑', '稍蜷', '浊响', '清晰', '稍凹', '软粘', '否'],
-    #     ['青绿', '稍蜷', '浊响', '清晰', '稍凹', '软粘', '是'],
-    #     ['乌黑', '稍蜷', '浊响', '清晰', '稍凹', '硬滑', '是']
-    # ]
-    # labels = ['色泽', '根蒂', '敲声', '纹理', '脐部', '触感', '好瓜']
-
-    # datasets = [
-    #     ['浊响', '稍凹', '软粘', '否'],
-    #     ['浊响', '稍凹', '硬滑', '是']
-    # ]
-    # labels = ['敲声', '脐部', '触感', '好瓜']
-
     return datasets, labels
 
-datasets, labels = create_data()
-train_data = pd.DataFrame(datasets, columns=labels)
-print(train_data)
+def show_data():
+    train_data = pd.DataFrame(datasets, columns=labels)
+    print(train_data)
+    counts = train_data['好瓜'].value_counts()
+    print('好瓜的数量为: {}，坏瓜的数量为: {}'.format(counts[1], counts[0]))
 
 #计算经验熵
 def calc_ent(datasets):
@@ -95,11 +61,9 @@ def cond_ent(datasets, axis=0):
 def info_gain(ent, cond_ent):
     return ent - cond_ent
 
-#计算所有特征的信息增益，并找出决策树根结点
 def info_gain_train(datasets):
     count = len(datasets[0]) - 1
     ent = calc_ent(datasets)
-    print("经验熵为: ",ent)
     best_feature = []
     for c in range(count):
         c_info_gain = info_gain(ent, cond_ent(datasets, axis=c))
@@ -110,5 +74,9 @@ def info_gain_train(datasets):
     best_ = max(best_feature, key=lambda x: x[-1])
     return '特征({})的信息增益最大，选择为根节点特征'.format(labels[best_[0]])
 
+
 if __name__ == '__main__':
-    print(info_gain_train(np.array(datasets)))
+    datasets, labels = create_data()
+    show_data()
+    print("初始数据集D的经验熵为: ", cond_ent(datasets))
+    print(info_gain_train(datasets))
