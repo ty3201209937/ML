@@ -45,6 +45,7 @@ def draw(datasets, labels):
     plt.xlabel('打斗镜头')
     plt.ylabel('笑点镜头')
 
+
 def clcEuclideanDis(x, y, datasets1):
     input_point = np.array([float(x), float(y)], dtype=float)
     distances = []
@@ -57,6 +58,7 @@ def clcEuclideanDis(x, y, datasets1):
 
 
     return distances
+
 
 def classify(k, distances, datasets):
     # 获取距离排序后的下标
