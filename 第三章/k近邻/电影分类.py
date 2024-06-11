@@ -51,6 +51,7 @@ def clcEuclideanDis(x, y, datasets1):
     distances = []
     for data in datasets1:
         data_point = np.array(data[:2], dtype=float)  # 提取坐标部分
+        a = (input_point - data_point) ** 2
         distance = np.sqrt(np.sum((input_point - data_point) ** 2))
         distances.append(distance)
     plt.scatter(x, y, color='black', marker='*')

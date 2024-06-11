@@ -40,13 +40,13 @@ def calcnum(dataset):  #这个函数的作用是？
     return labelCounts
 
 def calcShannonEnt(dataset):#这个函数的作用是？
-                            ##求数据集的经验条件熵
+                            ##求数据集的经验熵
     numEntries = len(dataset) #numEntries代表的含义？此时等于多少？
                               ##numEntries代表数据的个数，17
     labelCounts =calcnum(dataset)#这里进行了函数调用，此时labelCounts等于多少？
                                  ##{'好瓜'：8,'坏瓜'：9}
     shannonEnt = 0  #shannonEnt代表的含义是什么？
-                    ##经验条件熵
+                    ##经验熵
     for key in labelCounts:#key指的是labelCounts的什么？
                            ##标签的数量，好瓜和坏瓜，2
         prob = float(labelCounts[key]) / numEntries#这个for循环中，prob的值分别是多少？
